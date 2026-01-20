@@ -1,0 +1,602 @@
+/* Dashboard styles (scoped by .sf- prefixes) */
+.sf-dashboard-root {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 25%, #f093fb 50%, #4facfe 75%, #00f2fe 100%);
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  color: #fff;
+  padding: 24px 32px;
+  padding-bottom: 50px;
+  box-sizing: border-box;
+  font-family: "Inter", "Segoe UI", -apple-system, BlinkMacSystemFont, sans-serif;
+  position: relative;
+  overflow-x: hidden;
+  margin: 0;
+}
+
+/* Fix for Recruiter Dashboard with sidebar */
+.sf-dashboard-root[style*="padding: 0"] {
+  padding: 0 !important;
+  margin: 0 !important;
+  overflow: hidden !important;
+}
+
+/* Ensure sidebar is at the very left edge */
+.sf-dashboard-root aside[style*="position: fixed"] {
+  left: 0 !important;
+  margin-left: 0 !important;
+}
+
+/* Sidebar scrolling */
+.sf-dashboard-root aside {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.3) transparent;
+}
+
+.sf-dashboard-root aside::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sf-dashboard-root aside::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sf-dashboard-root aside::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.3);
+  border-radius: 3px;
+}
+
+.sf-dashboard-root aside::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.5);
+}
+
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+.sf-dashboard-root::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(79, 172, 254, 0.2) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.sf-dashboard-root > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Header */
+.sf-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  gap: 16px;
+  padding: 16px 24px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%);
+  backdrop-filter: blur(20px);
+  border-radius: 20px;
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+}
+.sf-logo {
+  font-weight: 900;
+  font-size: 24px;
+  letter-spacing: -0.5px;
+  color: #fff;
+  background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(255,255,255,0.15) 100%);
+  backdrop-filter: blur(10px);
+  padding: 12px 20px;
+  border-radius: 16px;
+  box-shadow: 
+    0 8px 24px rgba(0,0,0,0.2),
+    0 0 0 1px rgba(255,255,255,0.2) inset;
+  border: 1px solid rgba(255,255,255,0.3);
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+.sf-right {
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.sf-welcome-title { 
+  font-size: 17px; 
+  font-weight: 700;
+  color: #ffffff; 
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.sf-welcome-sub { 
+  font-size: 13px; 
+  color: rgba(255,255,255,0.85);
+  font-weight: 500;
+  margin-top: 2px;
+}
+.sf-profile { display:flex; align-items:center; gap:8px; }
+.sf-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  background: linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.2) 100%);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-weight: 800;
+  font-size: 18px;
+  box-shadow: 
+    0 8px 24px rgba(0,0,0,0.2),
+    0 0 0 1px rgba(255,255,255,0.2) inset;
+  border: 1px solid rgba(255,255,255,0.3);
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.sf-name { font-size: 14px; color:#fff; }
+
+/* Grid layout */
+.sf-grid {
+  display: grid;
+  grid-template-columns: 1fr 360px;
+  gap: 24px;
+}
+
+/* Card base */
+.sf-card {
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: 20px;
+  padding: 24px;
+  box-shadow: 
+    0 8px 32px rgba(0,0,0,0.3),
+    0 0 0 1px rgba(255,255,255,0.1) inset,
+    0 2px 8px rgba(255,255,255,0.1) inset;
+  border: 1px solid rgba(255,255,255,0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.sf-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+}
+
+.sf-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 12px 40px rgba(0,0,0,0.4),
+    0 0 0 1px rgba(255,255,255,0.15) inset,
+    0 4px 12px rgba(255,255,255,0.15) inset;
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* Intro card */
+.sf-intro-card {
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.3) 0%, rgba(118, 75, 162, 0.3) 100%);
+  border: 1px solid rgba(255,255,255,0.25);
+}
+
+.sf-intro-card h2 { 
+  margin: 0 0 8px; 
+  font-size: 28px; 
+  font-weight: 800;
+  color: #fff; 
+  text-shadow: 0 2px 12px rgba(0,0,0,0.2);
+  letter-spacing: -0.5px;
+}
+.sf-tagline { 
+  margin: 0; 
+  color: rgba(255,255,255,0.9); 
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 20px; 
+  text-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+.sf-actions { 
+  display: flex; 
+  gap: 12px; 
+  margin-top: 16px; 
+}
+
+/* Buttons */
+.sf-btn {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: #fff;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 14px;
+  cursor: pointer;
+  box-shadow: 
+    0 4px 16px rgba(102, 126, 234, 0.4),
+    0 0 0 1px rgba(255,255,255,0.1) inset;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  position: relative;
+  overflow: hidden;
+}
+
+.sf-btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+  transition: left 0.5s;
+}
+
+.sf-btn:hover::before {
+  left: 100%;
+}
+
+.sf-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    0 6px 20px rgba(102, 126, 234, 0.5),
+    0 0 0 1px rgba(255,255,255,0.2) inset;
+}
+
+.sf-btn:active {
+  transform: translateY(0);
+}
+
+.sf-btn.ghost {
+  background: rgba(255,255,255,0.1);
+  backdrop-filter: blur(10px);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+}
+
+.sf-btn.ghost:hover {
+  background: rgba(255,255,255,0.15);
+  border-color: rgba(255,255,255,0.3);
+}
+
+/* Performance card */
+.sf-performance h3 {
+  font-size: 22px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  color: #fff;
+  text-align: center;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.sf-performance h4 { 
+  margin: 10px 0 8px; 
+  color: rgba(255,255,255,0.95);
+  font-weight: 700;
+  font-size: 16px;
+}
+.sf-score-row { 
+  display: flex; 
+  gap: 20px; 
+  align-items: center; 
+  margin-bottom: 20px;
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(10px);
+  padding: 20px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.sf-score-block { 
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+  padding: 16px 24px; 
+  border-radius: 14px; 
+  flex: 1;
+  text-align: center;
+  border: 1px solid rgba(255,255,255,0.15);
+}
+.sf-score-number { 
+  font-size: 36px; 
+  color: #fff; 
+  font-weight: 900;
+  text-shadow: 0 2px 8px rgba(0,0,0,0.3);
+  line-height: 1.2;
+}
+.sf-score-out { 
+  font-size: 16px; 
+  color: rgba(255,255,255,0.8); 
+  font-weight: 600; 
+  margin-left: 6px; 
+}
+.sf-score-label { 
+  font-size: 13px; 
+  color: rgba(255,255,255,0.7);
+  margin-top: 8px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.sf-level-block { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  justify-content: center;
+  gap: 8px;
+  flex: 1;
+}
+.sf-level-pill { 
+  padding: 10px 20px; 
+  border-radius: 12px; 
+  font-weight: 800;
+  font-size: 14px;
+  background: rgba(255,255,255,0.1);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.sf-level-pill.beginner { 
+  background: linear-gradient(135deg, rgba(108,117,125,0.8) 0%, rgba(73,80,87,0.8) 100%);
+  border-color: rgba(108,117,125,0.4);
+}
+.sf-level-pill.intermediate { 
+  background: linear-gradient(135deg, rgba(244,180,0,0.9) 0%, rgba(255,193,7,0.9) 100%);
+  color: #000;
+  border-color: rgba(244,180,0,0.5);
+  text-shadow: 0 1px 2px rgba(255,255,255,0.3);
+}
+.sf-level-pill.advanced,
+.sf-level-pill.expert { 
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.9) 0%, rgba(118, 75, 162, 0.9) 100%);
+  border-color: rgba(102, 126, 234, 0.5);
+}
+.sf-level-label { 
+  font-size: 12px; 
+  color: rgba(255,255,255,0.8);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Bars chart */
+.sf-bars { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 14px; 
+  margin-top: 16px; 
+}
+.sf-bar-row { 
+  display: flex; 
+  align-items: center; 
+  gap: 12px; 
+}
+.sf-bar-label { 
+  width: 100px; 
+  font-size: 14px; 
+  color: rgba(255,255,255,0.9);
+  font-weight: 600;
+}
+.sf-bar-bg { 
+  flex: 1; 
+  background: rgba(255,255,255,0.1); 
+  border-radius: 10px; 
+  height: 16px; 
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.1);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1) inset;
+}
+.sf-bar-fill { 
+  height: 100%; 
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+  border-radius: 10px; 
+  transition: width 700ms ease;
+  box-shadow: 0 0 10px rgba(102, 126, 234, 0.5);
+  position: relative;
+}
+.sf-bar-fill::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: shimmer 2s infinite;
+}
+@keyframes shimmer {
+  0% { transform: translateX(-100%); }
+  100% { transform: translateX(100%); }
+}
+.sf-bar-value { 
+  width: 50px; 
+  text-align: right; 
+  font-size: 13px; 
+  color: rgba(255,255,255,0.9);
+  font-weight: 700;
+}
+
+/* Jobs */
+.sf-job-list { 
+  list-style: none; 
+  padding: 0; 
+  margin: 0; 
+  display: flex; 
+  flex-direction: column; 
+  gap: 14px; 
+}
+.sf-job-item { 
+  padding: 18px; 
+  border-radius: 16px; 
+  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+  backdrop-filter: blur(10px);
+  display: flex; 
+  flex-direction: column;
+  border: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+.sf-job-item::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+}
+.sf-job-item:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+  border-color: rgba(255,255,255,0.25);
+  background: linear-gradient(135deg, rgba(255,255,255,0.15) 0%, rgba(255,255,255,0.08) 100%);
+}
+.sf-job-role { 
+  font-weight: 800; 
+  font-size: 18px;
+  color: #fff;
+  margin-bottom: 8px;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+.sf-job-meta { 
+  font-size: 14px; 
+  color: rgba(255,255,255,0.85);
+  line-height: 1.6;
+  margin-top: 8px;
+}
+
+/* Right column */
+.sf-right-col { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 16px; 
+  position: sticky;
+  top: 24px;
+  align-self: start;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  padding-right: 8px;
+}
+
+.sf-right-col::-webkit-scrollbar {
+  width: 6px;
+}
+
+.sf-right-col::-webkit-scrollbar-track {
+  background: rgba(255,255,255,0.05);
+  border-radius: 10px;
+}
+
+.sf-right-col::-webkit-scrollbar-thumb {
+  background: rgba(255,255,255,0.2);
+  border-radius: 10px;
+}
+
+.sf-right-col::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+/* Loading overlay */
+.sf-loading { position: fixed; top: 12px; right: 12px; background: rgba(0,0,0,0.6); color:#fff; padding:8px 12px; border-radius:8px; }
+
+/* Responsive */
+@media (max-width: 900px) {
+  .sf-grid { grid-template-columns: 1fr; }
+  .sf-right-col { order: 2; }
+}
+/* --- FIX PERFORMANCE SECTION LAYOUT --- */
+.sf-performance {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Title centered & spaced */
+.sf-performance h3 {
+  text-align: center;
+  font-size: 18px;
+  margin-bottom: 6px;
+}
+
+/* Score + Level in one proper row */
+.sf-score-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(255,255,255,0.04);
+  padding: 12px;
+  border-radius: 12px;
+}
+
+/* Score Box */
+.sf-score-block {
+  flex: 1;
+}
+
+/* Level Section aligned right */
+.sf-level-block {
+  flex: 1;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Bars Section Boxed */
+.sf-chart {
+  background: rgba(255,255,255,0.03);
+  padding: 14px;
+  border-radius: 10px;
+}
+
+/* Centered Title */
+.sf-chart h4 {
+  text-align: center;
+  font-size: 15px;
+  margin-bottom: 10px;
+  color: #d7feff;
+}
+
+/* Bar Rows more compact */
+.sf-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.sf-bar-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Input and Select Styling */
+input::placeholder,
+select option {
+  color: rgba(255,255,255,0.5);
+}
+
+input:focus,
+select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.3);
+}
+
+select option {
+  background: #667eea;
+  color: #fff;
+  padding: 8px;
+}

@@ -1,0 +1,150 @@
+/* ======================= CSS ======================= */
+:root{
+  --bg1: #0b1020;
+  --bg2: #111a2f;
+  --fg: #eaf1ff;
+  --muted:#a8b6d5;
+  --accent:#87b4ff;
+  --accent2:#55e3c4;
+  --glass: rgba(255,255,255,.08);
+  --stroke: rgba(255,255,255,.16);
+  --ring: 0 0 0 4px rgba(135,180,255,.18);
+  --radius: 22px;
+  --shadow: 0 24px 60px rgba(0,0,0,.35);
+  --speed: 280ms;
+  --gap: 16px;
+  --font: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter, Roboto, Arial;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0; font-family:var(--font); color:var(--fg);
+  background: radial-gradient(1200px 800px at 80% -10%, #1a2550 0%, transparent 55%), linear-gradient(180deg, var(--bg1), var(--bg2));
+  overflow:hidden;
+}
+
+/* Animated background blobs */
+.bg{ position:fixed; inset:0; overflow:hidden; z-index:-1 }
+.blob{
+  position:absolute; width:45vmax; height:45vmax; filter: blur(60px); opacity:.55;
+  background: radial-gradient(circle at 30% 30%, #7aa8ff 0%, transparent 60%),
+              radial-gradient(circle at 70% 70%, #56e3c6 0%, transparent 60%);
+  animation: drift 20s ease-in-out infinite;
+  mix-blend-mode: screen;
+}
+.b1{ left:-10vmax; top:-8vmax; animation-duration: 26s }
+.b2{ right:-12vmax; bottom:-14vmax; animation-duration: 28s; animation-delay:-10s;
+     background: radial-gradient(circle at 40% 40%, #b58bff 0%, transparent 60%),
+                 radial-gradient(circle at 70% 70%, #7aa8ff 0%, transparent 60%); }
+.b3{ left:40%; top:60%; transform: translate(-50%,-50%); width:50vmax; height:50vmax; opacity:.45;
+     animation-duration: 30s; animation-delay:-5s;
+     background: radial-gradient(circle at 30% 70%, #4de6d1 0%, transparent 60%),
+                 radial-gradient(circle at 70% 30%, #8db6ff 0%, transparent 60%); }
+@keyframes drift{
+  0%,100%{ transform: translate3d(0,0,0) scale(1) }
+  50%{ transform: translate3d(2%, -3%, 0) scale(1.04) }
+}
+/* a subtle grain to sell the glass */
+.grain{ position:absolute; inset:-50%; opacity:.12; pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160' viewBox='0 0 160 160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  transform: translateZ(0);
+}
+
+/* Layout */
+.wrap{
+  min-height:100dvh; display:grid; place-items:center; padding:24px;
+}
+.card{
+  width: min(520px, 92vw);
+  background: var(--glass);
+  border: 1px solid var(--stroke);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  backdrop-filter: blur(14px) saturate(120%);
+  -webkit-backdrop-filter: blur(14px) saturate(120%);
+  overflow:hidden;
+}
+
+/* Tabs */
+.tabs{
+  display:flex; gap:8px; padding:10px; justify-content:center;
+  background: linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.03));
+}
+.tab{
+  appearance:none; border:0; padding:10px 16px; border-radius:999px; cursor:pointer;
+  background: transparent; color:var(--muted); font-weight:700; letter-spacing:.2px;
+}
+.tab.is-active{
+  color:var(--fg);
+  background: linear-gradient(90deg, rgba(135,180,255,.25), rgba(85,227,196,.25));
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.14);
+}
+.tab:focus-visible{ outline: 2px solid rgba(135,180,255,.7); outline-offset: 3px }
+
+/* Panels */
+.panel{ display:none; padding: 18px clamp(18px, 4vw, 28px) 26px; }
+.panel.is-active{ display:block; animation: fadeUp var(--speed) ease }
+@keyframes fadeUp{
+  from{ opacity:0; transform: translateY(4px) }
+  to{ opacity:1; transform: translateY(0) }
+}
+
+/* Form + floating labels */
+.form{ display:grid; gap:18px; }
+.field{ position:relative }
+.field input{
+  width:100%; font-size:16px; color:var(--fg);
+  padding: 16px 14px; border-radius:14px;
+  background: rgba(12,18,32,.45);
+  border: 1px solid rgba(255,255,255,.14);
+  outline:none; transition: box-shadow .2s, border-color .2s, transform .12s;
+}
+.field input::placeholder{ color:transparent }
+.field label{
+  position:absolute; left:12px; top:12px; padding:0 6px;
+  color:var(--muted); pointer-events:none; border-radius:6px;
+  background: rgba(12,18,32,.8); transition: transform .18s, top .18s, color .18s;
+}
+.field input:focus{
+  border-color: rgba(135,180,255,.9);
+  box-shadow: var(--ring), 0 10px 22px rgba(0,0,0,.25);
+}
+.field input:not(:placeholder-shown) + label,
+.field input:focus + label{
+  transform: translateY(-22px) scale(.88);
+  top:6px; color: var(--accent);
+}
+
+/* Button */
+.btn{
+  appearance:none; border:0; cursor:pointer; font-weight:800;
+  padding: 14px 16px; border-radius:14px; color:#0b111c;
+  background: linear-gradient(90deg, var(--accent), var(--accent2));
+  box-shadow: 0 14px 28px rgba(135,180,255,.25), 0 10px 22px rgba(85,227,196,.18);
+  transition: transform .08s ease, filter .2s ease, box-shadow .2s ease;
+}
+.btn:hover{ filter: brightness(1.05) }
+.btn:active{ transform: translateY(1px) scale(.99) }
+.btn:focus-visible{ outline: 2px solid rgba(135,180,255,.9); outline-offset: 3px }
+
+/* Helper text */
+.hint{ color:var(--muted); text-align:center; margin:6px 0 0 }
+.hint a{ color: var(--accent) }
+
+/* Shake animation for invalid submit */
+.shake{
+  animation: shake .4s cubic-bezier(.36,.07,.19,.97) both;
+}
+@keyframes shake{
+  10%, 90% { transform: translateX(-1px) }
+  20%, 80% { transform: translateX(2px) }
+  30%, 50%, 70% { transform: translateX(-4px) }
+  40%, 60% { transform: translateX(4px) }
+}
+
+/* Respect reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .blob, .panel.is-active{ animation: none }
+  .btn, .field input{ transition: none }
+}
